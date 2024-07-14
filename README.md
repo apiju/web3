@@ -392,5 +392,7 @@ function erc20Transfer(address _to, uint256 _amount) internal {
 通过这种设计，智能合约能够高效且公平地管理多个LP池子中的奖励分配，使得用户对质押LP代币和领取奖励的过程感到透明和公正。
 
 
-# InComing
-AllocationStaking和c2nSale 正在开发中。。。
+# AllocationStaking & IDO
+
+流程详解：
+https://fi1tqn67p7p.feishu.cn/docx/AtyddIX5To0pSqxOOnMc2497nrh

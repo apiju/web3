@@ -30,5 +30,5 @@
     # cd utils
     #  sh generate_update_data.sh [json_file] [server_url]
     # 样例:
-    #  sh generate_update_data.sh '{"saleAddress":"0x854D2A5697857E1c7d085ae3649bFC5d02F9a483","saleToken":"0x8332c63860eBAf9eCb1e61fb1829C76D2B2A1cB7","saleOwner":"0x0f590970a45d0b4c2dcfcaFF453400eE9B91B317","tokenPriceInEth":"100000000000","totalTokens":"10000000000000000000000","saleEndTime":1715244920,"tokensUnlockTime":1715244729,"registrationStart":1715243300,"registrationEnd":1715243600,"saleStartTime":1715243720}' 118.31.71.100:8080
+    #  sh generate_update_data.sh '{"saleAddress":"0x27e08DE9EFb6Df5312eC0E510AeBf6bBd6f8Bb42","saleToken":"0xc6e7DF5E7b4f2A278906862b61205850344D4e7d","saleOwner":"0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266","tokenPriceInEth":"100000000000","totalTokens":"10000000000000000000000000","saleEndTime":1719927033,"tokensUnlockTime":1719929233,"registrationStart":1719926133,"registrationEnd":1719926433,"saleStartTime":1719926733}' localhost:8080
 

@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useCallback } from 'react';
 import { Modal, Button, Input, message, Form, Row, Col, InputNumber, Spin } from 'antd';
 import axios from '@src/api/axios'
 import { useAppSelector, useAppDispatch } from "@src/redux/hooks";
@@ -20,11 +20,11 @@ export default function ParticipateModal(props) {
     loading,
   } = useWallet();
   const data = props.data || {};
-  const [eth, setEth] = useState<any>();
+  const [eth, setEth] = useState<any>(0);
   const [bre, setBre] = useState<any>(10);
   const [max, setMax] = useState<any>(10);
 
-  const tokenPriceInPT = formatEther(props.tokenPriceInPT);
+  const tokenPriceInPT = formatEther(props.tokenPriceInPT, 18);
 
   const allocationTop = useMemo(() => {
     return data.allocationTop;
@@ -34,6 +34,17 @@ export default function ParticipateModal(props) {
     return data.paymentTokenDecimal;
   }, [data])
 
+  const calEth = useCallback((breValue) => {
+    let eth;
+    try {
+      eth = Number(tokenPriceInPT) * Number(breValue)
+      // eth = formatEther(BigNumber.from((NUMBER_1E5 * breValue)).mul(Math.pow(10, 18 - decimals)).mul(data.tokenPriceInPT || 1).div(NUMBER_1E5), 8);
+    } catch (e) {
+      eth = 0;
+    }
+    return eth?.toFixed(6) || '';
+  }, [tokenPriceInPT, props.tokenPriceInPT]);
+
   useEffect(() => {
     if (allocationTop) {
       const bre = 10;
@@ -41,23 +52,12 @@ export default function ParticipateModal(props) {
       setMax(bre);
       setEth(calEth(bre));
     }
-  }, [allocationTop, decimals]);
+  }, [allocationTop, decimals, calEth]);
 
   function handleInputChange(value) {
     let bre = value;
     setBre(bre);
     setEth(calEth(bre));
-  }
-
-  function calEth(breValue) {
-    let eth;
-    try {
-      eth = Number(formatUnits(data.tokenPriceInPT || '1', 18)) * Number(breValue)
-      // eth = formatEther(BigNumber.from((NUMBER_1E5 * breValue)).mul(Math.pow(10, 18 - decimals)).mul(data.tokenPriceInPT || 1).div(NUMBER_1E5), 8);
-    } catch (e) {
-      eth = 0;
-    }
-    return eth?.toFixed(6) || '';
   }
 
   function handleOk() {
@@ -94,7 +94,8 @@ export default function ParticipateModal(props) {
             {eth}
           </div>
           <div className={styles['unit']}>
-            {data.paymentTokenSymbol || 'PL'}
+            {/* {data.paymentTokenSymbol || 'PL'} */}
+            ETH
           </div>
         </Col>
       </Row>
@@ -105,22 +106,22 @@ export default function ParticipateModal(props) {
           To:
         </Col>
         <Col span={20} offset={2}>
-          <AppPopover content={<>Max Amount: {max && max.toFixed(2)} {data.symbol || ''}</>}>
+          {/* <AppPopover content={<>Amount {data.symbol || ''}</>}> */}
             <InputNumber
               className={styles['number']}
               defaultValue={bre}
               min={'1'}
-              max={Math.floor(max) || 1}
+              // max={Math.floor(max) || 1}
               step="1"
               stringMode
               controls={false}
-              onChange={handleInputChange}
-              disabled={true}
+              onInput={handleInputChange}
+            // disabled={true}
             />
             <div className={styles['unit']}>
               {data.symbol || ''}
             </div>
-          </AppPopover>
+          {/* </AppPopover> */}
         </Col>
       </Row>
 

@@ -83,6 +83,8 @@ async function main() {
     //     process.exit(0)
     // }
     //
+    console.log('registrationStart:',registrationStart)
+    console.log('registrationEnd:',registrationEnd)
     tx = await sale.setRegistrationTime(
         registrationStart,
         registrationEnd

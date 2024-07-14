@@ -361,7 +361,7 @@ export default function Pool({ Component, pageProps }: AppProps) {
     return axios.post('/boba/encode/sign_registration', f)
       .then((response) => {
         let data = response.data;
-        console.log(data, 'ddddd')
+        console.log(data, 'sign_registration_data')
         return data;
       })
       .catch(e => {
@@ -524,6 +524,10 @@ export default function Pool({ Component, pageProps }: AppProps) {
     // const decimals = await depositTokenContract.decimals();
     // const paymentAmount = BigNumber.from(projectInfo.tokenPriceInPT).mul(~~value.value).div(Math.pow(10, 18-decimals));
     const paymentAmount = BigNumber.from(projectInfo.tokenPriceInPT).mul(~~value.value);
+    /**
+     * 购买代币
+     * 设置足够的代币授权，后面在withdraw时，会自动扣除相应的代币
+     */
     return approve(saleAddress, Number(ethers.utils.formatUnits(paymentAmount, depositDecimals)), depositDecimals)
       .then(getParticipateSign)
       .then(async (participateSign) => {
@@ -564,6 +568,7 @@ export default function Pool({ Component, pageProps }: AppProps) {
   }
 
   function withdrawTokens() {
+    const paymentAmount = BigNumber.from(projectInfo.tokenPriceInPT).mul(~~'30');
     if (!saleContract) {
       return Promise.reject();
     }
@@ -769,7 +774,9 @@ export default function Pool({ Component, pageProps }: AppProps) {
               className={'button ' + styles['register-button'] + ' ' + (isRegistered ? 'disabled' : '')}
               onClick={registerForSale}
             >
-              {isUserRegister ? 'Participate' : 'Register'}
+              {
+                // isUserRegister ? 'Participate': 
+                'Register'}
             </TransactionButton>
           }
         </AppPopover>
@@ -784,7 +791,9 @@ export default function Pool({ Component, pageProps }: AppProps) {
             disabledText={'Register'}
             className={'button ' + styles['register-button'] + ' ' + ('disabled')}
           >
-            {isUserRegister ? 'Participate' : 'Register'}
+            {
+              // isUserRegister ? 'Participate' :
+                'Register'}
           </TransactionButton>
         </AppPopover>
       } else if (!isUserRegister) {
@@ -809,13 +818,15 @@ export default function Pool({ Component, pageProps }: AppProps) {
       } else {
         return <TransactionButton
           disabled={isRegistered}
-          disabledText={'Participated'}
+          disabledText={'Registered'}
           noConnectText={'Connect wallet to register'}
           className={'button ' + styles['register-button'] + ' ' + (isRegistered ? 'disabled' : '')}
           onClick={registerForSale}
           style={{ backgroundColor: isUserRegister ? '#D7FF1E' : '' }}
         >
-          {isUserRegister ? 'Participate' : 'Register'}
+          {
+          // isUserRegister ? 'Participate' : 
+          'Register'}
         </TransactionButton>
       }
     }
@@ -907,7 +918,6 @@ export default function Pool({ Component, pageProps }: AppProps) {
       return <></>
     }
   }
-
   const cardInfo = useMemo(() => {
     // FIXME: get paymentTokenDecimals from backend
     const paymentTokenDecimas = 6;
@@ -1101,7 +1111,7 @@ export default function Pool({ Component, pageProps }: AppProps) {
         handleOk={participate}
         handleCancel={() => setShowParticipateModal(false)}
         tokenPriceInPT={projectInfo.tokenPriceInPT}
-      ></ParticipateModal>
+      />
     </main>
   )
 }

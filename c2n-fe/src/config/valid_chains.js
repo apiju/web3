@@ -43,7 +43,7 @@ export const VALID_CHAINS = [
       decimals: 18
     },
     rpc: [
-      "https://arbitrum-sepolia.blockpi.network/v1/rpc/public "
+      "https://arbitrum-sepolia.blockpi.network/v1/rpc/public"
     ],
     faucets: [],
     infoURL: "https://sepolia-explorer.arbitrum.io"
