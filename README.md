@@ -395,4 +395,23 @@ function erc20Transfer(address _to, uint256 _amount) internal {
 # AllocationStaking & IDO
 
 流程详解：
-https://fi1tqn67p7p.feishu.cn/docx/AtyddIX5To0pSqxOOnMc2497nrh
+[分配质押&IDO流程图文详解.pdf](./分配质押&IDO流程图文详解.pdf)
+学习目标：掌握AllocationStaking和IDO的业务流程和对应合约代码实现
+- 结合视频讲解理解业务流程，视频链接（ido讲解）
+- 参考farm的学习模式，根据业务流程对应合约逻辑部分，理解，学习代码实现
+- 合约学习内容
+  - 合约业务
+  - 单测
+  - 部署脚本（部署过程中存储中间变量，提供后续脚本或业务访问）
+- 服务端部分
+  - docker容器化部署
+- 前后端根据同学自身技术栈选择关注重点
+  - 前端学习内容
+    - web3react（初始化注入钱包：src/util/web3React、业务中hook用法）
+  - 后端学习内容
+    - web3j（后台私钥加密解密，身份验证，签名）
+  
+建议同学拓展开发项目模块
+1. 后台用go重写后台逻辑（使用go-ethereum），扩展业务内容，比如通过后台监听合约事件，存储变量（目前的流程是通过脚本启动ido）
+2. 前台做工程化优化（脚本、配置等可以做生产、开发模式的工程化重构），将脚本执行的业务通过页面应用形式实现等
+
