@@ -407,7 +407,7 @@ function erc20Transfer(address _to, uint256 _amount) internal {
 
 # AllocationStaking & IDO
 
-## 流程详解
+## 流程图文详解
 [分配质押&IDO流程图文详解.pdf](./分配质押&IDO流程图文详解.pdf)
 
 ## 学习目标
