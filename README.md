@@ -33,44 +33,32 @@ C2N launchpad是一个区块链上的一个去中心化发行平台，专注于�
 
 用户质押平台币，获得参与项目IDO的购买权重，后端配置项目信息并操作智能合约生成新的sale，用户在sale开始之后进行购买，项目结束后，用户进行claim
 
-## 平台流程参考
-https://medium.com/avalaunch/avalunch-tutorials-platform-overview-1675547b5aff
-
 # 功能操作
 ## 初始化
 要进行下面的流程，需要提前准备sepolia的测试代币作为gas
 1. 连接钱包(推荐metamask)
-![image](https://github.com/TechPlanB/C2N-Launchpad/assets/24291805/9450d4a1-6f14-41cd-8a24-dc7d550ff820)
-
 2. 切换网络到sepolia，或者可以直接在钱包里面进行切换
-![image](https://github.com/TechPlanB/C2N-Launchpad/assets/24291805/deb1d9f7-fe64-416b-9a08-9264535829eb)
 
 
-## Farm 流程
+## 项目一：Farm
 1. Farm 流程需要用到我们的Erc20测试代币C2N, 可以在首页领取C2N(一个账户只能领取一次),并且添加到我们metamask，添加之后我们可以在metamask 看到我们领取的C2N 代币
-![image](https://github.com/TechPlanB/C2N-Launchpad/assets/24291805/f0e78e0d-139e-451f-892b-4b5c797efd85)
 
 2. 在我们farm界面，我们可以质押fc2n 代币获取c2n, (方便大家操作，我们的测试网fc2n，c2n 是在上一步中领取的同一代币)，在这里我们有三个操作，stake:质押，unstake(withdraw):撤回质押， 以及 claim:领取奖励;
-![image](https://github.com/TechPlanB/C2N-Launchpad/assets/24291805/6776475a-0f55-41b4-84ef-b1d190455fe5)
 
 点击stake 或者claim 进入对应的弹窗，切换tab可以进行对应的操作；
 3. Stake ，输入要质押的FC2N代币数量，点击stake 会唤起钱包，在钱包中confirm，然后等待交易完成；
-![image](https://github.com/TechPlanB/C2N-Launchpad/assets/24291805/e04bba21-cd13-4c97-9163-48ed607e37fe)
 
 我们新增质押了1FC2N,交易完成之后我们会看到，My staked 从0.1 变成1.1;
 Total staked 的更新是一个定时任务，我们需要等待一小段时间之后才能看到更新
-![image](https://github.com/TechPlanB/C2N-Launchpad/assets/24291805/90e1b5e3-602e-4906-a44b-939257980707)
 
 3. Claim 领取质押奖励的C2N,点击claim 并且在钱包确认
-![image](https://github.com/TechPlanB/C2N-Launchpad/assets/24291805/4d19fb08-b594-4691-a1b8-f9ea4cff61f3)
 
 交易完成后我们会看到Available的FC2N数量增加了96，钱包里面C2N的代币数量同样增加了96
-![image](https://github.com/TechPlanB/C2N-Launchpad/assets/24291805/cb3f5bd1-414f-413d-afa2-5ad57a4a0413)
 
 4. Unstake(withdraw),输入需要撤回的FC2N 数量(小于已经质押的Balance)，点击withdraw，并且在钱包确认交易
-![image](https://github.com/TechPlanB/C2N-Launchpad/assets/24291805/dd67ed78-7b9b-4b8d-b1ff-394897b721cb)
 
 unstake 完成后我们可以看到my staked 的数量变为0
+
 # 技术文档
 
 部署流程
@@ -120,23 +108,14 @@ depositTokenAddress和earnedTokenAddress为AIRDROP_TOKEN的地址
 
 项目核心由两个合约组成，以下列出需要实现的函数功能
 ## AllocationStaking.sol
-关系调用
-![image](https://github.com/TechPlanB/C2N-Launchpad/assets/24291805/b2e1857e-ad5b-46fa-a573-cce00c3d2507)
 
 函数说明
 暂时无法在飞书文档外展示此内容
 ## BrewerySale.sol 功能
-关系调用
-![image](https://github.com/TechPlanB/C2N-Launchpad/assets/24291805/897ded45-185f-4c2e-80cf-cda678667fe9)
 
-函数调用
-暂时无法在飞书文档外展示此内容
 技术依赖
 OpenZeppelin
 OpenZeppelin库提供了一些安全的合约实现，如ERC20、SafeMath等。
-
-前端开发
-WIP
 
 后端开发
 数据库输入项目信息，配合合约sale显示项目进度和用户购买信息
