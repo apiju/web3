@@ -428,3 +428,22 @@ function erc20Transfer(address _to, uint256 _amount) internal {
 1. 后台用go重写后台逻辑（使用go-ethereum），扩展业务内容，比如通过后台监听合约事件，存储变量（目前的流程是通过脚本启动ido）
 2. 前台做工程化优化（脚本、配置等可以做生产、开发模式的工程化重构），将脚本执行的业务通过页面应用形式实现等
 
+
+## makefile命令解释
+将脚本命令简化成了make直接可执行的命令，写到了makefile中
+
+需要安装`make`编译工具，如果没有安装，直接执行makefile文件中的js命令也可以
+
+命令列表：
+farm流程涉及执行的命令
+- farm
+AllocationStaking & ido流程涉及执行的命令
+- ido
+- sales
+- deposit
+启动本地测试链
+- node
+运行单测
+- runtest
+升级合约（暂未使用）
+- upgrades

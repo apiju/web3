@@ -19,3 +19,23 @@ node 版本：v18.19.1
 5. `npx hardhat run --network local scripts/deployment/deploy_singletons.js`
 6. 设置saleConfig
 7. `npx hardhat run --network local scripts/deployment/deploy_sales.js`
+
+
+## makefile命令解释
+将脚本命令简化成了make直接可执行的命令，写到了makefile中
+
+需要安装`make`编译工具，如果没有安装，直接执行makefile文件中的js命令也可以
+
+命令列表：
+farm流程涉及执行的命令
+- farm
+AllocationStaking & ido流程涉及执行的命令
+- ido
+- sales
+- deposit
+启动本地测试链
+- node
+运行单测
+- runtest
+升级合约（暂未使用）
+- upgrades
