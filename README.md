@@ -43,10 +43,10 @@ C2N launchpad是一个区块链上的一个去中心化发行平台，专注于�
 
     存入LP代币：
     用户将流动性提供（LP）代币存入农场合约中。存入的LP代币代表用户在去中心化交易所（如Uniswap或SushiSwap）中提供的流动性。
-
+    
     获取奖励：
     用户根据其质押的LP代币数量和时间，按比例获得ERC20代币奖励。奖励是根据区块时间或秒计算的。
-
+    
     提取LP代币和奖励：
     用户可以随时提取其质押的LP代币，并获取其累积的ERC20代币奖励。
 
@@ -57,14 +57,14 @@ C2N launchpad是一个区块链上的一个去中心化发行平台，专注于�
     结构体：
         UserInfo：存储每个用户的质押数量和奖励债务。
         PoolInfo：存储每个流动性池的信息，包括LP代币合约地址、分配点数、最后奖励计算时间、每股累积的ERC20奖励和总质押数量。
-
+    
     核心变量：
         erc20：奖励代币的合约地址。
         rewardPerSecond：每秒奖励的ERC20代币数量。
         startTimestamp和endTimestamp：质押挖矿的开始和结束时间。
         totalRewards：农场总奖励的ERC20代币数量。
         totalAllocPoint：所有流动性池的总分配点数。
-
+    
     主要函数：
         fund：向农场添加奖励代币，并延长质押挖矿的结束时间。
         add：添加新的流动性池。
@@ -79,13 +79,13 @@ C2N launchpad是一个区块链上的一个去中心化发行平台，专注于�
 
     管理员添加奖励代币：
     管理员调用fund函数向农场添加奖励代币，并设置结束时间。
-
+    
     用户质押LP代币：
     用户调用deposit函数，将LP代币存入农场。
-
+    
     用户获取奖励：
     用户调用withdraw函数，提取其质押的LP代币并获取相应的ERC20代币奖励。
-
+    
     紧急提取：
     在紧急情况下，用户可以调用emergencyWithdraw函数，提取所有质押的LP代币，但不会获取任何奖励。
 
@@ -131,7 +131,7 @@ c2n-fe/src/config/valid_chains.js
 
 修改 c2n-fe/src/config/farms.js
 depositTokenAddress和earnedTokenAddress为AIRDROP_TOKEN的地址
-修改stakingAddress为部署的farm合约地址
+修改stakingAddress为部署的farm合约地址：地址在\c2n-contracts\scripts\deployment\deploy_farm.js\里面有日志，盯着点
 
 部署完毕，可以使用账号体验farm功能
 
@@ -270,7 +270,7 @@ function fund(uint256 _amount) public {
   处理边界条件，确保在计算奖励时，各种时间点和奖励量的处理是合理和正确的：
   - 时间边界处理：如果当前时间已经超过了奖励分配的结束时间（endTimestamp），则需要相应调整逻辑以防止奖励超发。
   - LP代币总量检查：如果矿池中没有LP代币（totalDeposits为0），则不进行奖励计算，直接更新时间戳。
-参考实现：
+  参考实现：
 ```
 function updatePool(uint256 _pid) public {
     PoolInfo storage pool = poolInfo[_pid];
@@ -307,7 +307,7 @@ function updatePool(uint256 _pid) public {
       - 提取LP代币：安全地将用户请求的LP代币数量从合约转移到用户账户。
       - 更新用户存款数据：更新用户的存款总额和奖励债务，准确记录用户的新状态。
       - 记录事件：发出Withdraw事件，记录此次提款操作的详细信息。
-参考答案：
+      参考答案：
 ```
 // Deposit LP tokens to Farm for ERC20 allocation.
 function deposit(uint256 _pid, uint256 _amount) public {
@@ -426,7 +426,7 @@ function erc20Transfer(address _to, uint256 _amount) internal {
     - web3react（初始化注入钱包：src/util/web3React、业务中hook用法）
   - 后端学习内容
     - web3j（后台私钥加密解密，身份验证，签名）
-  
+
 ### 建议同学拓展开发项目模块*
 1. 后台用go重写后台逻辑（使用go-ethereum），扩展业务内容，比如通过后台监听合约事件，存储变量（目前的流程是通过脚本启动ido）
 2. 前台做工程化优化（脚本、配置等可以做生产、开发模式的工程化重构），将脚本执行的业务通过页面应用形式实现等
